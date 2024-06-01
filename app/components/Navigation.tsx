@@ -1,11 +1,23 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Navigation() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "nord");
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "light";
+    } else {
+      return "light"; // Fallback if localStorage is not available
+    }
+  });
 
   const handleToggle = () => {
-    setTheme(theme === "nord" ? "dim" : "nord");
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "light" ? "dim" : "light";
+      if (typeof window !== "undefined") {
+        localStorage.setItem("theme", newTheme);
+      }
+      return newTheme;
+    });
   };
 
   useEffect(() => {
@@ -19,7 +31,7 @@ export function Navigation() {
   return (
     <div className="navbar bg-neutral text-neutral-content">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">photoUpload</a>
       </div>
       <div className="flex-none">
         <label className="swap swap-rotate">

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "./components/Navigation";
+import { supabase } from "@/lib/supabse";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,12 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="nord">
+    <html lang="en" data-theme="light">
       <body
-        className={`min-h-dvh grid grid-cols-[1fr] grid-rows-[auto_1fr] ${inter.className}`}
+        className={`min-h-dvh grid grid-cols-[1fr] grid-rows-[auto_1fr] ${poppins.className}`}
       >
         <Navigation />
-        {children}
+        <main className="bg-base-200">{children}</main>
       </body>
     </html>
   );

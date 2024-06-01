@@ -15,6 +15,14 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    styled: true,
+    themes: ["nord", "dim"],
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+  },
 };
 export default config;
